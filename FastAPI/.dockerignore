@@ -1,0 +1,6 @@
+#venv
+.gitignore
+.git
+.vscode
+.pytest_cache
+__pycache__
