@@ -28,6 +28,6 @@
         },
         components: {
             vZubsTable
-        },
+        }
     }
 </script>

@@ -30,16 +30,16 @@
     export default {
         name: "v-zubstable",
         computed: {
-            ...mapState('zub', ['zubs'])
+            ...mapState('zub', ['zubs']),
         },
         methods: {
             ...mapActions('zub', ['GET_ALL_ZUBS_FROM_API']),
-            loadZubs () {
+            loadZubs() {
                 this.GET_ALL_ZUBS_FROM_API()
             }
         },
         mounted() {
-            this.loadZubs()
+                this.loadZubs()
         }
     }
 

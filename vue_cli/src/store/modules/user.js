@@ -16,13 +16,13 @@ export default {
     },
     actions: {
         async LOGIN_USER({ commit }, form) {
-            const response = await axios.post('api/v1/login', form)
+            const response = await axios.post('api/v1/login/', form)
 
             const user = await response.data
             commit('UPDATE_USER_AUTH', user)
         },
         async REGISTER_USER({ commit }, form) {
-            const response = await axios.post('api/v1/register', form)
+            const response = await axios.post('api/v1/register/', form)
             // .then(() => this.$router.push('/register'))
             // .catch(err => console.log(err))
             const user = await response.data

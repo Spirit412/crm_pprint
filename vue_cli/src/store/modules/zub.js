@@ -11,21 +11,6 @@ export default {
             return state.zubs
         },
     },
-    actions: {
-        GET_ALL_ZUBS_FROM_API({commit},) {
-            return axios('api/v1/zub', { method:'GET'
-            })
-                .then((zubs) => {
-                    commit('SET_ALL_ZUBS_TO_STATE', zubs.data);
-                    return zubs
-                })
-                .catch((error) => {
-                    console.log(error)
-                    return error
-                })
-        },
-    },
-
     mutations: {
         SET_ALL_ZUBS_TO_STATE: (state, zubs) => {
             state.zubs = zubs
@@ -35,4 +20,20 @@ export default {
             state.zubs_count = zubs.length
         },
     },
+    actions: {
+        GET_ALL_ZUBS_FROM_API({commit},) {
+            return axios('api/v1/zub/', {
+                method: 'GET'
+            })
+                .then((resronse) => {
+                    commit('SET_ALL_ZUBS_TO_STATE', resronse.data)
+                })
+                .catch((error) => {
+                    console.warn('GET LIST ZUUBS что-то пошло не так :(')
+                    // console.warn(error)
+                    // return error
+                })
+        },
+    }
+
 }

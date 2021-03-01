@@ -14,13 +14,14 @@ export default {
     },
     actions: {
         GET_ALL_DIECUTS_FROM_API({commit},) {
-            return axios('api/v1/diecuts', { method:'GET'
+            return axios('api/v1/diecuts/', { method:'GET'
             })
                 .then((diecuts) => {
+                    console.log('получил данные')
                     commit('SET_ALL_DIECUTS_TO_STATE', diecuts.data);
-                    return diecuts
                 })
                 .catch((error) =>{
+                    console.warn('что-то пошло не так')
                     console.log(error)
                     return error
                 })

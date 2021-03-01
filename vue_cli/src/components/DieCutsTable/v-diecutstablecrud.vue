@@ -54,7 +54,7 @@
         },
         methods: {
             ...mapActions('diecut', ['GET_ALL_DIECUTS_FROM_API']),
-            loadDiecuts () {
+            loadDiecuts() {
                 this.GET_ALL_DIECUTS_FROM_API()
             }
         },

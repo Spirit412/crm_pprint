@@ -33,3 +33,5 @@ axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getIte
 ```
 src\router\index.js
 ```
+
+Файл webpack.config.js - что бы WebStorm понимал ссылки типа `@/`
