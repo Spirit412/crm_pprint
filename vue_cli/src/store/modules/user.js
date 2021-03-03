@@ -17,7 +17,6 @@ export default {
     actions: {
         async LOGIN_USER({ commit }, form) {
             const response = await axios.post('api/v1/login/', form)
-
             const user = await response.data
             commit('UPDATE_USER_AUTH', user)
         },

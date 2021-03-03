@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="page-title">
-            <h3> - {{info}} - - История записей</h3>
+            <h3>История записей</h3>
         </div>
 
         <div class="history-chart">
@@ -47,13 +47,15 @@
     export default {
         data() {
             return {
-                info: null
+                info: ''
             }
         },
         mounted() {
-            axios.get('https://blockchain.info/ru/ticker')
+            axios.get('http://localhost:8080/home')
                 .then(resp => {
-                    console.log(resp.data)
+                    console.log(process.env.VUE_APP_BASE_URL_API)
+                    this.info = resp.data
+
                 })
                 .catch(e => {
                     console.warn(e)

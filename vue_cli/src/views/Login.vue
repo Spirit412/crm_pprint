@@ -104,7 +104,7 @@
             passErrors() {
                 const errors = []
                 if (!this.$v.logform.password.$dirty) return errors
-                !this.$v.logform.password.minLength && errors.push('password must be at most 10 characters long')
+                !this.$v.logform.password.minLength && errors.push('password must be at most 6 characters long')
                 !this.$v.logform.password.required && errors.push('password is required.')
                 return errors
             },
