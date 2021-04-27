@@ -9,7 +9,7 @@
         <div class="row row__vgap">{{row_data.vgap}}</div>
         <div class="row row__tbl_edit" v-if="user_role === 'admin'">
             <button class="btn-small btn">
-                <i class="material-icons">mode_edit</i>
+                <i class="material-icons">open_in_new</i>
             </button>
         </div>
     </div>

@@ -10,7 +10,7 @@ logging.basicConfig()
 # logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 # logging.getLogger("sqlalchemy.engine").setLevel(logging.DEBUG)
 # logging.getLogger("sqlalchemy.pool").setLevel(logging.INFO)
-logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+# logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
 
 def get_url_db():
@@ -26,7 +26,7 @@ def get_url_db():
 SQLALCHEMY_DATABASE_URL = get_url_db()
 
 engine = create_engine(get_url_db())
-echo = True,  # выводить запросы в консоль 
+# echo = True,  # выводить запросы в консоль 
 # echo_pool='debug'
 
 SessionLocal = sessionmaker(autocommit=False,

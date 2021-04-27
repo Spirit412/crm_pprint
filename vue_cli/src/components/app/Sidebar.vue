@@ -19,14 +19,14 @@ export default {
     data: () => ({
         links: [
             {title: 'Счет', url: '/', exact: true},
-            {title: 'История', url: '/historys'},
-            {title: 'Цифровые заказы', url: '/djobs'},
+            // {title: 'История', url: '/historys'},
+            // {title: 'Цифровые заказы', url: '/djobs'},
             {title: 'Таблица Z', url: '/zubs'},
-            {title: 'Таблица штампов', url: '/diecuts'},
-            {title: 'Планирование', url: '/planning'},
+            // {title: 'Таблица штампов', url: '/diecuts'},
+            // {title: 'Планирование', url: '/planning'},
             {title: 'Новая запись', url: '/record'},
-            {title: 'Категории', url: '/categories'},
-            {title: 'Заказчики', url: '/customers'},
+            // {title: 'Категории', url: '/categories'},
+            // {title: 'Заказчики', url: '/customers'},
         ]
     })
 }

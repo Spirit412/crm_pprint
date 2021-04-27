@@ -6,8 +6,8 @@ Vue.use(Vuex);
 import user from './modules/user'
 import zub from './modules/zub'
 import diecut from './modules/diecut'
-import djob from './modules/djob'
-import customer from './modules/customer'
+// import djob from './modules/djob'
+// import customer from './modules/customer'
 
 
 export default new Vuex.Store({
@@ -15,7 +15,7 @@ export default new Vuex.Store({
         user,
         zub,
         diecut,
-        djob,
-        customer,
+        // djob,
+        // customer,
     }
 });

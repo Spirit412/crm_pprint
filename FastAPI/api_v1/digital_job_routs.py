@@ -124,8 +124,9 @@ async def get_all_djob(db: Session = Depends(get_db)):
 async def create_djob(data_input: schemas.DigitalJobPrint, db: Session = Depends(get_db)):
     data_input: dict = data_input.dict(exclude_unset=True)
     digitaljob_num: str = data_input['digitaljob_num']
-    
-    
+
+
+
     try:
         data_db = db.query(models.DigitalJobPrint.digitaljob_num).filter(
             models.DigitalJobPrint.digitaljob_num == digitaljob_num).first()
@@ -133,6 +134,7 @@ async def create_djob(data_input: schemas.DigitalJobPrint, db: Session = Depends
         return {"msg DB": f"{e}"}
 
     if data_db is None:
+
         frames_in_djob = []
         data_djob = data_input.copy()
         for data_frame_num in range(len(data_input['frames'])):  # каждый фрейм
@@ -151,6 +153,7 @@ async def create_djob(data_input: schemas.DigitalJobPrint, db: Session = Depends
         db.add(data_djob_mod)
         db.commit()
         db.refresh(data_djob_mod)
+        # получим данные записи из БД
         data_db = db.query(models.DigitalJobPrint).filter(
             models.DigitalJobPrint.digitaljob_num == digitaljob_num).first()
         return schemas.DigitalJobPrint(**(jsonable_encoder(data_db)))
