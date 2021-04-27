@@ -15,12 +15,12 @@ router = APIRouter()
 
 
 # ZUB
-@router.get("/{id}", tags=[tags[2]], response_model=schemas.ZubSchema)
+@router.get("/{id}", response_model=schemas.ZubSchema)
 async def get_zub_id(id: str, db: Session = Depends(get_db)):
     return service.get_zub_single(db=db, zub_id=id)
 
 
-@router.get("/", tags=[tags[2]], response_model=List[schemas.ZubSchema])
+@router.get("/", response_model=List[schemas.ZubSchema])
 async def get_zub_list(db: Session = Depends(get_db)):
     isJson = jsonable_encoder(service.get_zub_list(db))
     return isJson

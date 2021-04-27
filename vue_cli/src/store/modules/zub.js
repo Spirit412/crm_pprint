@@ -29,7 +29,7 @@ export default {
                     commit('SET_ALL_ZUBS_TO_STATE', resronse.data)
                 })
                 .catch((error) => {
-                    console.warn('GET LIST ZUUBS что-то пошло не так :(')
+                    console.warn('GET LIST ZUBS что-то пошло не так :(')
                     // console.warn(error)
                     // return error
                 })

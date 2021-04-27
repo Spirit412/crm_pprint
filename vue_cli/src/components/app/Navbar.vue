@@ -63,33 +63,34 @@
         },
 
         mounted() {
-            //Если токен или имя пустые, перенаправлять на страницу логина.
-            // if (localStorage.getItem('token') && localStorage.getItem('name')) {
-            //     this.name = localStorage.getItem('name')
-            //     console.log('Проверка. Из локального хранилища: localStorage.getItem(\'name\'): ' + localStorage.getItem('name'))
-            // } else {
-            //     this.$router.push('/login')
-            // }
+            // // // Если токен или имя пустые, перенаправлять на страницу логина.
+            if (localStorage.getItem('token') && localStorage.getItem('name')) {
+                this.name = localStorage.getItem('name')
+                console.log('Проверка. Из локального хранилища: localStorage.getItem(\'name\'): ' + localStorage.getItem('name'))
+            } else {
+                this.$router.push('/login')
+            }
 
             this.interval = setInterval(() => {
                 this.date = new Date()
             }, 1000)
-            // console.log(this.$refs);
             this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
-                constrainWidth: false
+                // // // опции дропдауна
+                constrainWidth: false,
+                coverTrigger: false
             })
         },
         computed: {
             theme() {
                 return (this.$vuetify.theme.dark) ? 'dark' : 'light'
             }
+        },
+        beforeDestroy() {
+          console.log('before Destroy')
+          clearInterval(this.interval)
+          if (this.dropdown && this.dropdown.destroy) {
+            this.dropdown.destroy()
+          }
         }
-        // beforeDestroy() {
-        //   console.log('before Destroy')
-        //   clearInterval(this.interval)
-        //   if (this.dropdown && this.dropdown.destroy) {
-        //     this.dropdown.destroy()
-        //   }
-        // }
     }
 </script>

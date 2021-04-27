@@ -105,6 +105,36 @@ const routes = [{
         },
         component: () =>
             import ('../views/Diecuts')
+    },
+    {
+        path: '/djobs',
+        name: 'djobs',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/DJobs')
+    },
+    {
+        path: '/djobsadd',
+        name: 'djobsadd',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/DJobsAdd')
+    },
+    {
+        path: '/customers',
+        name: 'customers',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/Customers')
     }
 ]
 

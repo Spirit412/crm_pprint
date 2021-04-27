@@ -2,11 +2,12 @@
     <div>
         <div class="page-title">
             <h3>Таблица штампов</h3>
-            <h5>Всего штампов в таблице: {{ diecuts_count }}</h5>
-            <!--            <h5>Всего штампов в таблице: XXX</h5>-->
+            <h6>Штампов: {{ diecuts.length }}</h6>
         </div>
         <section>
-            <vDieCutsTableCRUD
+            <vTable
+                :diecuts_data="diecuts"
+                :user-role="userRole"
             />
         </section>
     </div>
@@ -14,20 +15,35 @@
 </template>
 
 <script>
-    import vDieCutsTableCRUD from "@/components/DieCutsTable/v-diecutstablecrud";
-    import {mapState} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
+    import vTable from "@/components/DieCutsTable/v-table";
+    import _ from 'lodash'
 
     export default {
         name: 'Diecuts',
-        data: () => ({
-            loading: true,
-        }),
-        computed: {
-            ...mapState('diecut', ['diecuts_count']),
+        data() {
+            return {
+                loading: true,
+                userRole: 'user',
+                editing: false,
+            }
         },
         components: {
-            vDieCutsTableCRUD
+            vTable
         },
+        computed: {
+            ...mapState('diecut', ['diecuts']),
+            
+        },
+        methods: {
+            ...mapActions('diecut', ['GET_ALL_DIECUTS_FROM_API']),
+            loadDiecuts() {
+                this.GET_ALL_DIECUTS_FROM_API()
+            }
+        },
+        mounted() {
+            this.loadDiecuts()
+            this.userRole = localStorage.getItem('role')
+        }
     }
 </script>
-

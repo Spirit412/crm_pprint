@@ -16,12 +16,13 @@ export default {
     },
     actions: {
         async LOGIN_USER({ commit }, form) {
-            const response = await axios.post('api/v1/login/', form)
+            const response = await axios.post('api/v1/user/login/', form)
             const user = await response.data
+            console.log(user)
             commit('UPDATE_USER_AUTH', user)
         },
         async REGISTER_USER({ commit }, form) {
-            const response = await axios.post('api/v1/register/', form)
+            const response = await axios.post('api/v1/user/register/', form)
             // .then(() => this.$router.push('/register'))
             // .catch(err => console.log(err))
             const user = await response.data
@@ -36,17 +37,20 @@ export default {
             localStorage.token = user.token
             localStorage.email = user.email
             localStorage.name = user.name
-            localStorage.role = user.role
+            localStorage.role = user.role_user.role
+            localStorage.description = user.description
             state.token = user.token
             state.email = user.email
             state.name = user.name
-            state.role = user.role
+            state.role = user.role_user.role
+            state.description = user.description
         },
         LOGOUT(state) {
             state.token = null
             state.email = null
             state.name = null
             state.role = null
+            state.description = null
             localStorage.clear()
         }
     }

@@ -1,8 +1,12 @@
 from fastapi.testclient import TestClient
 from main import app
-import logging
+import sys
+from loguru import logger
+fmt = "<green>{time}</green> - {name} - {level} - {message}"
 
-LOGGER = logging.getLogger(__name__)
+logger.add(sys.stderr, format=fmt, filter="my_module", level="INFO", backtrace=True,
+           diagnose=True, colorize=True)
+# logger.level("CUSTOM", no=45, color="<red>", icon="🚨")
 
 client = TestClient(app)
 
@@ -15,23 +19,23 @@ cut = {
     "hgap": "4.1900",
     "vgap": "0.0000",
     "cf2": "файл cf2",
-    "mfg": "файл ЬАП",
+    "mfg": "файл MFG",
     "pict": "файл картинки",
-    "descript": "тест "
+    "descript": "тест"
 }
 plus_version_url_api = '/api/v1'
 
 def test_get_cut():
-    LOGGER.info('eggs info')
-    LOGGER.warning('eggs warning')
-    LOGGER.error('eggs error')
-    LOGGER.critical('eggs critical')
+    logger.info('eggs info')
+    logger.warning('eggs warning')
+    logger.error('eggs error')
+    logger.critical('eggs critical')
 
     response = client.get(f"{plus_version_url_api}/diecuts/{cut['cut_name']}")
-    LOGGER.info(f'Ответ сервера: {response}')
+    # LOGGER.info(f'Ответ сервера: {response}')
 
     data = response.json()
-    LOGGER.info(f'Ответ в формате json: {data}')
+    logger.info(f'Получаем данные по штампу из БД в формате json: {data}')
 
     if response.status_code == 200 and data['cut_name'] == cut['cut_name'].upper():
         # """Штам есть. Удаляем"""
@@ -47,21 +51,22 @@ def test_get_cut():
 
 
 def delete(id):
-    LOGGER.info(f"Штам {id}. Удаляем")
+    logger.info(f"Штам {id}. Удаляем")
     # assert response.status_code == 200
     response = client.delete(f"{plus_version_url_api}/diecuts/{id}")
     assert response.status_code == 200
 
 
 def create(id: dict):
-    LOGGER.info(f"Создаём штамп {id['cut_name']}")
+    logger.info(f"Создаём штамп \n {id['cut_name']}")
     response = client.post(f"{plus_version_url_api}/diecuts/",
                            json=id
                            )
     assert response.status_code == 201
     # Проверяем
-    LOGGER.info("Проверям созданный штамп")
+    logger.info("Проверям созданный штамп")
     data = response.json()
+    logger.info(f"Данные из БД созданного штампа \n {data}")
     assert 'zub_num' in data
     assert 'cut_name' in data
 
@@ -71,16 +76,22 @@ def create(id: dict):
 
 
 def update(id: dict):
-    LOGGER.info(f"Обновляем штамп {id['cut_name']}")
     id['descript'] = 'test update'
+    id['cf2'] = 'файл CF2 обновили'
+    id['hgap'] = 9
+    id['vgap'] = 9
+    logger.info(f"данные на обновление: {id}")
     response = client.patch(f"{plus_version_url_api}/diecuts/{id['cut_name']}",
                            json=id
                            )
-    assert response.status_code == 200
+    # assert response.status_code == 200
     # Проверяем
-    LOGGER.info("Проверям обновлённый штамп")
+    logger.info("Проверям обновлённый штамп")
     data = response.json()
-    LOGGER.info(f"проверка описания {data}")
-    # assert data['descript'] == 'test update'
+    logger.info(f"Данные штампа после обновления \n {data}")
+    assert data['descript'] == 'test update'
+    assert data['cf2'] == 'файл CF2 обновили'
+    assert data['hgap'] == 9
+    assert data['vgap'] == 9
 
 
