@@ -2,104 +2,105 @@ version: '3.9'
 
 #настройка сети между контейнерами.
 networks:
-  static-network:
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.5.0.0/16
+    static-network:
+        ipam:
+            driver: default
+            config:
+                -   subnet: 10.5.0.0/16
 
 
 
 volumes:
 
-  vue_crm:
-    name: pprint_vue
+    vue_crm:
+        name: pprint_vue
 
-  FastAPI:
-    name: FastAPI
+    FastAPI:
+        name: FastAPI
 
-  pgAdmin:
-    name: pgAdmin
+    pgAdmin:
+        name: pgAdmin
 
-  postgres:
-    name: postgres
+    postgres:
+        name: postgres
 
-    
+
+
 
 services:
-  vue_ui:
-    container_name: vue_ui
-    build:
-      context: ./vue_cli
-      dockerfile: Dockerfile
-    stdin_open: true
-    tty: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - ./vue_cli:/app
-      - /app/node_modules
-    ports:
-      - 5000:5000
-    restart: unless-stopped #рестарт если контейнер "вылетает"
-#    depends_on:
-#      - app_fastapi
-    networks: #принудительно задаём IP
-      static-network:
-        ipv4_address: 10.5.0.10
 
-
-  database:
-    image: postgres:13 # имя контейнера
-    container_name: "postgres_cont"
-    ports:
-      - "6532:5432"
-    env_file:
-      - pg-env.env # configure env postgres
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped #рестарт если контейнер "вылетает"
-    logging: #отключаем логирование в консоли
-      driver: none
-    networks:
-      static-network:
-        ipv4_address: 10.5.0.5
+    database:
+        image: postgres:13 # имя контейнера
+        container_name: "postgres_cont"
+        ports:
+            - "6532:5432"
+        env_file:
+            - pg-env.env # configure env postgres
+        volumes:
+            - ./postgres:/var/lib/postgresql/data
+        restart: unless-stopped #рестарт если контейнер "вылетает"
+        logging: #отключаем логирование в консоли
+            driver: none
+        networks:
+            static-network:
+                ipv4_address: 10.5.0.5
 
 
 
-  pgAdmin:
-    image: dpage/pgadmin4 #имя контейнера
-    container_name: "pgAdmin_cont"
-    ports:
-      - "5555:80"
-    env_file:
-      - pgadmin-env.env # configure pgAdmin
-    depends_on:
-      - database
-    volumes:
-      - ./pgAdmin:/var/lib/pgadmin
-    restart: unless-stopped #рестарт если контейнер "вылетает"
-    logging: #отключаем логирование в консоли
-      driver: none
-    networks:
-      static-network:
-        ipv4_address: 10.5.0.8
+    pgAdmin:
+        image: dpage/pgadmin4 #имя контейнера
+        container_name: "pgAdmin_cont"
+        ports:
+            - "5555:80"
+        env_file:
+            - pgadmin-env.env # configure pgAdmin
+        depends_on:
+            - database
+        volumes:
+            - ./pgAdmin:/var/lib/pgadmin
+        restart: unless-stopped #рестарт если контейнер "вылетает"
+        logging: #отключаем логирование в консоли
+            driver: none
+        networks:
+            static-network:
+                ipv4_address: 10.5.0.8
 
 
-  app_fastapi:
-    # image: python:3.8
-    container_name: "app_FastAPI" #имя контейнера
-    build:
-      context: ./FastAPI
-      dockerfile: Dockerfile
-    volumes:
-      - ./FastAPI:/app_fastapi
-    ports:
-      - 8000:8000
-    depends_on:
-      - database
-    entrypoint: ["python", "main.py"]
-    restart: unless-stopped #рестарт если контейнер "вылетает"
-    networks: #принудительно задаём IP
-      static-network:
-        ipv4_address: 10.5.0.6
+    app_fastapi:
+        # image: python:3.8
+        container_name: "app_FastAPI" #имя контейнера
+        build:
+            context: ./FastAPI
+            dockerfile: Dockerfile
+        volumes:
+            - ./FastAPI:/app_fastapi
+        ports:
+            - 8080:8000
+        depends_on:
+            - database
+        entrypoint: ["python", "main.py"]
+        restart: unless-stopped #рестарт если контейнер "вылетает"
+        networks: #принудительно задаём IP
+            static-network:
+                ipv4_address: 10.5.0.6
+
+    vue_ui:
+        container_name: vue_ui
+        build:
+            context: ./vue_cli
+            dockerfile: Dockerfile
+        stdin_open: true
+        tty: true
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+        volumes:
+            - ./vue_cli:/app
+            - /app/node_modules
+        ports:
+            - 5000:5000
+        restart: unless-stopped #рестарт если контейнер "вылетает"
+        depends_on:
+            - app_fastapi
+        networks: #принудительно задаём IP
+            static-network:
+                ipv4_address: 10.5.0.10

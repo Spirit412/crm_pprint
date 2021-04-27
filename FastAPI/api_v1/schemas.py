@@ -1,5 +1,5 @@
 from pydantic import condecimal, BaseModel, ValidationError, Field, ValidationError, validator
-from typing import *
+from typing import List, Optional, Dict
 from datetime import datetime
 from uuid import UUID
 
@@ -42,7 +42,6 @@ class DieCutSchema(BaseModel):
     descript: str = Field(None, example='описание к штампу')
 
 
-
 class DieCutGetListSchema(DieCutSchema):
     version_uuid: UUID = None
     created_on: datetime = None
@@ -67,3 +66,90 @@ class DieCutCreateSchema(BaseModel):
     mfg: str = Field(None, example='ex_cut.mfg')
     pict: str = Field(None, example='ex_cut.png')
     descript: str = Field(None, example='описание к штампу')
+
+
+class Color(BaseModel):
+    color_fullname: str
+
+    class Config:
+        orm_mode = True
+
+
+class DesignPart(BaseModel):
+    name: str
+    descript: str
+    colors: Optional[List[Color]]
+
+    class Config:
+        orm_mode = True
+
+
+class Design(BaseModel):
+    design_id: int
+    design_num: str = Field(..., example='A001')
+    parts: Optional[List[DesignPart]]
+
+    class Config:
+        orm_mode = True
+
+
+class Customer(BaseModel):
+    name: str
+    descript: str
+
+    class Config:
+        orm_mode = True
+
+
+class CustomerListSchema(Customer):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+
+class RowFrame(BaseModel):
+    descript: str
+    design_url: str
+    row_number: int
+    design_angle_rotate: int
+
+    class Config:
+        orm_mode = True
+
+
+class FrameDigitalJob(BaseModel):
+    frame_num: int
+    descript: str
+    rows: Optional[List[RowFrame]] = None
+
+    class Config:
+        orm_mode = True
+
+
+class DigitalJobPrint(BaseModel):
+    digitaljob_num: str
+    descript: str
+    bleed: str
+    razmeshenie: str
+    color_print: str
+    customer_id: int
+    diecut_cut_name: str
+
+    frames: Optional[List[FrameDigitalJob]] = None
+
+    class Config:
+        orm_mode = True
+
+
+class DigitalJobTable(BaseModel):
+    digitaljob_num: str = Field(example='05 1001')
+    descript: str = Field(example='описание')
+    customer: Optional[Customer] = Field(description='Заказчик')
+
+    # diecut_cut_name: str
+
+    # frames: Optional[List[FrameDigitalJob]] = None
+
+    class Config:
+        orm_mode = True

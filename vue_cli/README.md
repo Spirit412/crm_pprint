@@ -33,3 +33,18 @@ axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getIte
 ```
 src\router\index.js
 ```
+
+Файл webpack.config.js - что бы WebStorm понимал ссылки типа `@/`
+```js
+module.exports = {
+    resolve: {
+        alias: {
+            "@": require("path").resolve(__dirname, "src") // change this to your folder path
+        }
+    }
+};
+```
+
+Установил lodash
+`npm install --save vue-lodash lodash
+`
