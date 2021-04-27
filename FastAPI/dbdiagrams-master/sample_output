@@ -1,0 +1,105 @@
+
+
+Table "alembic_version" {
+"version_num" varchar 
+}
+
+Table "colors" {
+"color_id" int4 [pk]
+"color_fullname" varchar [pk]
+}
+
+Table "colors_to_parts_table" {
+"part_id" int4 
+"color_id" int4 
+}
+
+Table "customers" {
+"id" int4 [pk]
+"name" varchar 
+"descript" text 
+}
+
+Table "designs" {
+"design_id" int4 [pk]
+"design_num" varchar 
+}
+
+Table "diecuts" {
+"cut_name" varchar [pk]
+"cf2" varchar 
+"hcountitem" int4 
+"hgap" numeric 
+"mfg" varchar 
+"vcountitem" int4 
+"vgap" numeric 
+"vsheet" int4 
+"zub_num" int4 
+"descript" text 
+"pict" varchar 
+"version_uuid" varchar 
+"created_on" timestamp 
+"updated_on" timestamp 
+}
+
+Table "digital_jobs_print" {
+"digitaljob_id" int4 [pk]
+"digitaljob_num" varchar 
+"descript" text 
+"customer" int4 
+}
+
+Table "frames" {
+"frame_id" int4 [pk]
+"frame_num" int4 
+"descript" text 
+"digitaljob_id" int4 
+}
+
+Table "parts" {
+"part_id" int4 [pk]
+"name" varchar 
+"descript" text 
+"design_id" int4 
+}
+
+Table "roles" {
+"id" int4 [pk]
+"role" varchar 
+"description" text 
+}
+
+Table "rows_frame" {
+"row_id" int4 [pk]
+"descript" text 
+"frame_id" int4 
+}
+
+Table "users" {
+"id" int4 [pk]
+"email" varchar 
+"name" varchar 
+"password" varchar 
+"created_on" timestamp 
+"updated_on" timestamp 
+"is_active" bool 
+"description" text 
+"role_id" int4 
+}
+
+Table "zubs" {
+"zub_num" int4 [pk]
+"hpolimer" numeric 
+"hpolimer_17" numeric 
+"hprint" numeric 
+"version_uuid" varchar 
+"created_on" timestamp 
+"updated_on" timestamp 
+}
+
+Ref: "colors"."color_id" < "colors_to_parts_table"."color_id"
+Ref: "designs"."design_id" < "parts"."design_id"
+Ref: "digital_jobs_print"."digitaljob_id" < "frames"."digitaljob_id"
+Ref: "frames"."frame_id" < "rows_frame"."frame_id"
+Ref: "parts"."part_id" < "colors_to_parts_table"."part_id"
+Ref: "zubs"."zub_num" < "diecuts"."zub_num"
