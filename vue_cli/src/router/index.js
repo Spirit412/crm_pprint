@@ -31,42 +31,6 @@ const routes = [{
         component: () =>
             import ('../views/Register.vue')
     },
-    // {
-    //     path: '/categories',
-    //     name: 'categories',
-    //     meta: {
-    //         layout: 'main'
-    //     },
-    //     component: () =>
-    //         import ('../views/Categories.vue')
-    // },
-    // {
-    //     path: '/historys',
-    //     name: 'historys',
-    //     meta: {
-    //         layout: 'main'
-    //     },
-    //     component: () =>
-    //         import ('../views/Historys.vue')
-    // },
-    // {
-    //     path: '/detail',
-    //     name: 'detail',
-    //     meta: {
-    //         layout: 'main'
-    //     },
-    //     component: () =>
-    //         import ('../views/Detail.vue')
-    // },
-    // {
-    //     path: '/planning',
-    //     name: 'planning',
-    //     meta: {
-    //         layout: 'main'
-    //     },
-    //     component: () =>
-    //         import ('../views/Planning.vue')
-    // },
     {
         path: '/profile',
         name: 'profile',
@@ -96,46 +60,46 @@ const routes = [{
         component: () =>
             import ('../views/Zubs.vue')
     },
-    // {
-    //     path: '/diecuts',
-    //     name: 'diecuts',
-    //     meta: {
-    //         layout: 'main',
-    //         // requiresAuth: true
-    //     },
-    //     component: () =>
-    //         import ('../views/Diecuts')
-    // },
-    // {
-    //     path: '/djobs',
-    //     name: 'djobs',
-    //     meta: {
-    //         layout: 'main',
-    //         // requiresAuth: true
-    //     },
-    //     component: () =>
-    //         import ('../views/DJobs')
-    // },
-    // {
-    //     path: '/djobsadd',
-    //     name: 'djobsadd',
-    //     meta: {
-    //         layout: 'main',
-    //         // requiresAuth: true
-    //     },
-    //     component: () =>
-    //         import ('../views/DJobsAdd')
-    // },
-    // {
-    //     path: '/customers',
-    //     name: 'customers',
-    //     meta: {
-    //         layout: 'main',
-    //         // requiresAuth: true
-    //     },
-    //     component: () =>
-    //         import ('../views/Customers')
-    // }
+    {
+        path: '/diecuts',
+        name: 'diecuts',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/Diecuts')
+    },
+    {
+        path: '/djobs',
+        name: 'djobs',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/DJobs')
+    },
+    {
+        path: '/djobadd',
+        name: 'djobadd',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/DJobAdd')
+    },
+    {
+        path: '/customers',
+        name: 'customers',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/Customers')
+    }
 ]
 
 const router = new VueRouter({
