@@ -1,5 +1,5 @@
 <template>
-    <form class="card auth-card" @submit.prevent="submit">
+    <form class="card auth-card" @submit.prevent="submitForm">
         <div class="card-content">
             <span class="card-title">CRM Pprint 1.0</span>
             <div class="input-field">
@@ -89,7 +89,7 @@
             ...mapActions({
                 loginUser: 'user/LOGIN_USER'
             }),
-            submit() {
+            submitForm() {
                 this.loginUser(this.logform)
                     .then(() => this.$router.push('/'))
                     .catch(err => console.log(err))

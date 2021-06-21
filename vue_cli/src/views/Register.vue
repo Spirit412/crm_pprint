@@ -1,5 +1,5 @@
 <template>
-  <form class="card auth-card" @submit.prevent="submit">
+  <form class="card auth-card" @submit.prevent="submitForm">
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
@@ -127,22 +127,11 @@ export default {
     ...mapActions({
       regUser: 'user/REGISTER_USER'
     }),
-    submit() {
-      // if (this.$v.$invalid) {
-      //   this.$v.$touch();
-      //   return;
-      // }
+      submitForm() {
       this.regUser({'email': this.regform.email, 'password': this.regform.password, 'name': this.regform.name})
         .then(() => this.$router.push('/'))
         .catch(err => console.log(err))
-      // const formData = {
-      //   email: this.email,
-      //   password: this.password,
-      //   name: this.name,
-      // };
-      // console.log(formData);
 
-      // this.$router.push("/");
     },
   },
 };

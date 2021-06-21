@@ -10,7 +10,7 @@
             <p class="descript">Описание
                 <i class="material-icons md-18">unfold_more</i>
             </p>
-            <p v-if="userRole === 'admin'">EDIT
+            <p v-if="userRole === 'admin'" class="edit" >EDIT
                 <i class="material-icons md-24">mode_edit</i>
             </p>
         </div>
@@ -19,6 +19,7 @@
                 v-for="(row, index) in customers_data"
                 :key="row.name"
                 :row_data="row"
+                :index="index"
                 :user_role="userRole"
             />
         </div>
@@ -55,7 +56,9 @@
 
 </script>
 
-<style>
+<style scss>
+    $width: 25%;
+    
     .material-icons.md-18 {
         font-size: 18px;
         padding-left: 15px;
@@ -87,32 +90,46 @@
         flex-basis: 5%;
         text-align: left;
         cursor: pointer;
+        text-align: left;
     }
 
     .v-table__header p.name{
         display: flex;
         align-items: center;
-        flex-basis: 20%;
+        flex-basis: $width;
         text-align: left;
         cursor: pointer;
+        text-align: left;
         /*background: cornflowerblue;*/
     }
 
     .v-table__header p.descript{
         display: flex;
         align-items: center;
-        flex-basis: 60%;
+        flex-basis: $width;
         text-align: left;
         cursor: pointer;
+        text-align: left;
+        /*background: #42b983;*/
+    }
+
+    .v-table__header p.edit{
+        display: flex;
+        align-items: center;
+        flex-basis: $width;
+        text-align: left;
+        cursor: pointer;
+        text-align: left;
         /*background: #42b983;*/
     }
 
     .v-table__header p.index{
         display: flex;
         align-items: center;
-        flex-basis: 5%;
+        flex-basis: $width;
         text-align: left;
         cursor: pointer;
+        text-align: left;
         /*background: #8b42b9;*/
     }
 

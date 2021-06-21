@@ -9,7 +9,6 @@ from . import service, schemas, models
 router = APIRouter()
 
 
-
 @router.get("/", status_code=200,
             response_model=List[schemas.DieCutGetListSchema]
             )
@@ -46,5 +45,3 @@ async def post_newdiecut(item: schemas.DieCutCreateSchema,
 async def update_item(item: schemas.DieCutSchema, item_id: str,
                       db: Session = Depends(get_db)):
     return service.update_diecut_single(db=db, item_id=item_id.upper(), item=item)
-
-

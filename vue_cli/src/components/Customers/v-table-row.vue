@@ -1,6 +1,7 @@
 <template>
     <div class="v-table-row">
-        <div class="row row__name bold">{{row_data.digitaljob_num}}</div>
+        <div class="row row__number bold">{{index+1}}</div>
+        <div class="row row__name bold">{{row_data.name}}</div>
         <div class="row row__descript">{{row_data.descript}}</div>
         <div class="row row__tbl_edit" v-if="user_role === 'admin'">
             <button class="btn-small btn">
@@ -14,6 +15,13 @@
     export default {
         name: "v-table-row",
         props: {
+
+            index: {
+                type: Number,
+                default: () => {
+                    return {}
+                }
+            },
             row_data: {
                 type: Object,
                 default: () => {
@@ -38,7 +46,7 @@
     }
 
     .row {
-        flex-basis: 15%;
+        flex-basis: 25%;
         padding: 8px 16px;
         text-align: left;
     }

@@ -26,6 +26,11 @@ auth_handler = AuthHandler()
             description="Получить данные цифрового заказа по его номеру",
             )
 async def get_single_digitaljob(id: str, db: Session = Depends(get_db)):
+    """
+    :param id: id  цифрового заказа
+    :param db: 
+    :return: json данные одного цифрового заказа
+    """
     try:
         get_gesign = db.query(models.DigitalJobPrint).options(
             joinedload('frames'),

@@ -5,7 +5,7 @@
         </div>
         <section>
             <div class="row">
-                <form class="col s6" action="" method="post">
+                <form class="col s6" action="test" method="post" @submit.prevent="addNewDjob">
                     <div class="row">
                         <vSelect
                             :dataInput="diecuts"
@@ -16,29 +16,33 @@
                     <p>{{selected}}</p>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="job_number" type="text" class="validate">
-                            <label for="job_number">Номер заказа</label>
+                            <input id="digitaljob_num" type="text" v-model="digitaljob_num" class="validate"
+                                   placeholder="номер заказа">
+                            <label for="digitaljob_num">Номер заказа</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="costumer_name" type="text" class="validate">
-                            <label for="costumer_name">Заказчик</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="diecut" :placeholder="selected" type="text" class="validate" :value="selected">
-                            <label for="diecut">Штамп {{selected}}</label>
-                        </div>
-                    </div>
+                    <div class="row">{{digitaljob_num}}</div>
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="input-field col s6">-->
+                    <!--                            <input id="costumer_name" type="text" class="validate">-->
+                    <!--                            <label for="costumer_name">Заказчик</label>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="input-field col s6">-->
+                    <!--                            <input id="diecut" :placeholder="selected" type="text" class="validate" :value="selected">-->
+                    <!--                            <label for="diecut">Штамп {{selected}}</label>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
 
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="bleed" type="text" class="validate">
-                            <label for="bleed">Bleed</label>
-                        </div>
-                    </div>
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="input-field col s6">-->
+                    <!--                            <input id="bleed" type="text" class="validate">-->
+                    <!--                            <label for="bleed">Bleed</label>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <button type="submit"
+                    >Submit</button>
                 </form>
             </div>
         </section>
@@ -100,10 +104,17 @@
             optionSelect(option) {
                 this.selected = option
             },
+            addNewDjob() {
+                console.log('тырк')
+            },
+            test() {
+                console.log('test')
+            },
         },
         mounted() {
             this.loadDiecuts()
             this.userRole = localStorage.getItem('role')
+            M.updateTextFields()
         }
     }
 </script>

@@ -34,6 +34,20 @@ export default {
                     // return error
                 })
         },
+        async ADD_ZUB({commit}, form) {
+            await axios.post('api/v1/zub/', form)
+                .then((res) => {
+                    console.log(res.data)
+                })
+                .catch((error) => {
+                    // error.response.status Check status code
+                    console.warn('ADD_ZUB что-то пошло не так :(' + '  ' + error)
+                })
+                .finally(() => {
+                    //Perform action in always
+                })
+            
+        }
     }
 
 }

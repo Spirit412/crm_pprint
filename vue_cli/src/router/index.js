@@ -61,6 +61,17 @@ const routes = [{
             import ('../views/Zubs.vue')
     },
     {
+        path: '/zubadd',
+        name: 'zubadd',
+        meta: {
+            layout: 'main',
+            requiresAuth: true,
+            auth: true
+        },
+        component: () =>
+            import ('../views/ZubAdd.vue')
+    },
+    {
         path: '/diecuts',
         name: 'diecuts',
         meta: {
@@ -69,6 +80,16 @@ const routes = [{
         },
         component: () =>
             import ('../views/Diecuts')
+    },
+    {
+        path: '/diecutadd',
+        name: 'diecutadd',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/DiecutAdd')
     },
     {
         path: '/djobs',

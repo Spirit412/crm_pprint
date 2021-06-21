@@ -24,3 +24,11 @@ async def get_zub_id(id: str, db: Session = Depends(get_db)):
 async def get_zub_list(db: Session = Depends(get_db)):
     isJson = jsonable_encoder(service.get_zub_list(db))
     return isJson
+
+
+@router.post("/",
+             status_code=201,
+             description="Добавление Z")
+async def post_newz(item: schemas.ZubSchema,
+                         db: Session = Depends(get_db)):
+    return service.create_zub(db=db, item=item)

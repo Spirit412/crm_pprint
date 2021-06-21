@@ -22,7 +22,9 @@ export default {
             {title: 'Цифровые заказы', url: '/djobs'},
             {title: '+ цифровой заказ', url: '/djobadd'},
             {title: 'Таблица Z', url: '/zubs'},
+            {title: '+ Z', url: '/zubadd'},
             {title: 'Таблица штампов', url: '/diecuts'},
+            {title: '+ штамп', url: '/diecutadd'},
             {title: 'Новая запись', url: '/record'},
             {title: 'Заказчики', url: '/customers'},
         ]

@@ -27,6 +27,20 @@ export default {
                     return error
                 })
         },
+        async ADD_DIECUT({commit}, form) {
+            await axios.post('api/v1/diecuts/', form)
+                .then((res) => {
+                    console.log(res.data)
+                })
+                .catch((error) => {
+                    // error.response.status Check status code
+                    console.warn('ADD_DIECUT что-то пошло не так :(' + '  ' + error)
+                })
+                .finally(() => {
+                    //Perform action in always
+                })
+
+        },
     },
     mutations: {
         SET_ALL_DIECUTS_TO_STATE: (state, diecuts) => {

@@ -60,8 +60,6 @@ def create_diecut(db: Session, item: schemas.DieCutCreateSchema):
     return {"msg": "Такой штамп существует"}
 
 
-
-
 def delete_customer(db: Session, id: int):
     item = db.query(models.Customer).filter(models.Customer.id == id).first()
     if item is None:
@@ -152,3 +150,15 @@ def get_zub_single(db: Session, zub_id: str):
 
 def get_zub_list(db: Session):
     return db.query(models.Zub).all()
+
+
+def create_zub(db: Session, item: schemas.ZubSchema):
+    zub = models.Zub(**item.dict())
+    print(zub.zub_num)
+    item = db.query(models.DieCut).filter(models.Zub.zub_num == zub.zub_num).first()
+    if item is None:
+        db.add(zub)
+        db.commit()
+        db.refresh(zub)
+        return zub
+    return {"msg": "Такой зуб существует в БД"}
