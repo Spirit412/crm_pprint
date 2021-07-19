@@ -32,42 +32,6 @@ const routes = [{
             import ('../views/Register.vue')
     },
     {
-        path: '/categories',
-        name: 'categories',
-        meta: {
-            layout: 'main'
-        },
-        component: () =>
-            import ('../views/Categories.vue')
-    },
-    {
-        path: '/historys',
-        name: 'historys',
-        meta: {
-            layout: 'main'
-        },
-        component: () =>
-            import ('../views/Historys.vue')
-    },
-    {
-        path: '/detail',
-        name: 'detail',
-        meta: {
-            layout: 'main'
-        },
-        component: () =>
-            import ('../views/Detail.vue')
-    },
-    {
-        path: '/planning',
-        name: 'planning',
-        meta: {
-            layout: 'main'
-        },
-        component: () =>
-            import ('../views/Planning.vue')
-    },
-    {
         path: '/profile',
         name: 'profile',
         meta: {
@@ -97,6 +61,17 @@ const routes = [{
             import ('../views/Zubs.vue')
     },
     {
+        path: '/zubadd',
+        name: 'zubadd',
+        meta: {
+            layout: 'main',
+            requiresAuth: true,
+            auth: true
+        },
+        component: () =>
+            import ('../views/ZubAdd.vue')
+    },
+    {
         path: '/diecuts',
         name: 'diecuts',
         meta: {
@@ -105,6 +80,26 @@ const routes = [{
         },
         component: () =>
             import ('../views/Diecuts')
+    },
+    {
+        path: '/diecutadd',
+        name: 'diecutadd',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/DiecutAdd')
+    },
+    {
+        path: '/test_ui',
+        name: 'test_ui',
+        meta: {
+            layout: 'main',
+            // requiresAuth: true
+        },
+        component: () =>
+            import ('../views/Test_UI')
     },
     {
         path: '/djobs',
@@ -117,14 +112,14 @@ const routes = [{
             import ('../views/DJobs')
     },
     {
-        path: '/djobsadd',
-        name: 'djobsadd',
+        path: '/djobadd',
+        name: 'djobadd',
         meta: {
             layout: 'main',
             // requiresAuth: true
         },
         component: () =>
-            import ('../views/DJobsAdd')
+            import ('../views/DJobAdd')
     },
     {
         path: '/customers',

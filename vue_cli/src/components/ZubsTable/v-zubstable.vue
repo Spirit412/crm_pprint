@@ -33,7 +33,8 @@
             ...mapState('zub', ['zubs']),
         },
         methods: {
-            ...mapActions('zub', ['GET_ALL_ZUBS_FROM_API']),
+            ...mapActions(
+                'zub', ['GET_ALL_ZUBS_FROM_API']),
             loadZubs() {
                 this.GET_ALL_ZUBS_FROM_API()
             }

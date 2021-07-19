@@ -27,6 +27,7 @@ export default {
             {title: 'Новая запись', url: '/record'},
             {title: 'Категории', url: '/categories'},
             {title: 'Заказчики', url: '/customers'},
+            {title: 'Тест UI', url: '/test_ui'},
         ]
     })
 }
