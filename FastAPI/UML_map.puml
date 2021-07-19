@@ -1,0 +1,119 @@
+@startuml
+'https://plantuml.com/class-diagram
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+
+page 1x1
+skinparam pageMargin 10
+skinparam pageExternalColor gray
+skinparam pageBorderColor black
+
+@startjson
+{
+    "design_id": 1,
+    "design_num": "A001",
+    "parts": [
+        {
+            "name": "lico",
+            "descript": "лицо этикетки",
+            "colors": [
+                {
+                    "color_fullname": "CYAN"
+                },
+                {
+                    "color_fullname": "BLACK"
+                }
+            ]
+        },
+        {
+            "name": "back",
+            "descript": "оборот",
+            "colors": [
+                {
+                    "color_fullname": "MAT_LAK"
+                },
+                {
+                    "color_fullname": "CYAN"
+                }
+            ]
+        }
+    ]
+}
+@endjson
+
+object Custumer {
+    str: name   
+}
+
+
+frame User {
+
+class A {
+{static} int counter
++void {abstract} start(int timeout)
+}
+note right of A::counter
+  This member is annotated
+end note
+note right of A::start
+  This method is now explained in a UML note
+end note
+
+
+
+
+class User {
+    .. Поля модели ..
+    - int id
+    + str email (unique=True, nullable=False)
+    + str name (unique=True, nullable=False)
+    + str password (nullable=False)
+    - datatime: created_on (default=datetime.utcnow())
+    - datatime: updated_on (default=datetime.utcnow(), 
+        onupdate=datetime.utcnow())
+    + bool: is_active (default=True)
+    + text: description (nullable=True)
+    -- relationship --
+    role_id FK('roles.id', default=1)
+    role_user RS('Role', lazy='joined')
+}
+
+'note bottom: Класс пользователя
+
+class Role {
+    .. Поля модели ..
+    - int: id
+    + str: role (unique=True, nullable=False)
+    + text: description (nullable=True)
+    -- relationship --
+    role_id = ( FK('roles.id'), default=1)
+    role_user = relationship('Role', lazy='joined')
+}
+}
+Role "1" <..* "*" User
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+
+@enduml

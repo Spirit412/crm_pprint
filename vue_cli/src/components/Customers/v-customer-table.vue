@@ -58,7 +58,7 @@
 
 <style scss>
     $width: 25%;
-    
+
     .material-icons.md-18 {
         font-size: 18px;
         padding-left: 15px;
